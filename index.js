@@ -20,6 +20,15 @@ restService.post('/echo', function(req, res) {
     });
 });
 
+restService.post('/signOn', function(req, res) {
+   var speech = "You have successfuly signed in!"
+    return res.json({
+        speech: speech,
+        displayText: speech,
+        source: 'webhook-echo-sample'
+    });
+});
+
 restService.post('/slack-test', function(req, res) {
 
     var slack_message = {
