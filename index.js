@@ -21,7 +21,33 @@ restService.use(bodyParser.json());
 //});
 
 restService.post('/signOn', function(req, res) {
-   var speech = "You have successfuly signed in!"
+   var speech = ""
+   
+   var request = require('request');
+
+    var options = {
+      uri: 'https://pilot.api.ebanking.cibc.com/ebm-anp/api/v1/json/sessions',
+      method: 'POST',
+      json: {
+        "card" : {
+            "value" : "4506448426446045",
+            "encrypted" : "false",
+            "encrypt" : "true"
+        },
+          "password" : "potato"
+      }
+    };
+
+    request(options, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+          speech = "You have successfuly signed in!"
+        //console.log(body.id) // Print the shortened url.
+      } else {
+          speech = "na nai chaleya !! "
+      }
+    });
+   
+   
     return res.json({
         speech: speech,
         displayText: speech,
