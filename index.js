@@ -37,16 +37,15 @@ app.post('/signOn', function(req, res) {
         "4506448426445112",
         "4506448426445252"
     ]
+
     var cardNumber = ""
-    if (cardNickname == "Greg") {
+    if (cardNickname.toUpperCase() === "Greg".toUpperCase()) {
         cardNumber = cardNumbers[0]
-    } else if (cardNickname == "Mohit") {
+    } else if (cardNickname.toUpperCase() === "Mohit".toUpperCase()) {
         cardNumber = cardNumbers[1]
-    } else if (cardNickname == "Nick") {
+    } else if (cardNickname.toUpperCase() === "Nick".toUpperCase()) {
         cardNumber = cardNumbers[2]
     }
-
-
 
     // Only continue if the required fields are provided
     if (cardNumber != '' && password != '') {
