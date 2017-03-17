@@ -27,13 +27,31 @@ app.post('/signOn', function(req, res) {
     console.log(req.body)
 
     // Get the card number and password from the request
-    var cardNumber = req.body.result && req.body.result.parameters && req.body.result.parameters.cardNumber ? req.body.result.parameters.cardNumber : ''
+    var cardNickname = req.body.result && req.body.result.parameters && req.body.result.parameters.cardNickname ? req.body.result.parameters.cardNickname : ''
     var password = req.body.result && req.body.result.parameters && req.body.result.parameters.password ? req.body.result.parameters.password : ''
     // var cardNumber = "4506445090048206"
     // var password = "banking"
 
+    var cardNumbers = [
+        "4506448426445187",
+        "4506448426445112",
+        "4506448426445252"
+    ]
+    var cardNumber = ""
+    if (cardNickname == "Greg") {
+        cardNumber = cardNumbers[0]
+    } else if (cardNickname == "Mohit") {
+        cardNumber = cardNumbers[1]
+    } else if (cardNickname == "Nick") {
+        cardNumber = cardNumbers[2]
+    }
+
+
+
     // Only continue if the required fields are provided
     if (cardNumber != '' && password != '') {
+        
+
 
         // Set the callback for the call
         var callback = function(error, response, body) {
