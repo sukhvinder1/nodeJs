@@ -1,5 +1,5 @@
 {
-  "name": "webhook-echo-sample",
+  "name": "poc",
   "version": "1.0.0",
   "description": "Webhook echo sample",
   "main": "index.js",
@@ -10,5 +10,15 @@
   "dependencies": {
     "body-parser": "^1.15.0",
     "express": "^4.13.4"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sukhvinder1/nodeJs.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sukhvinder1/nodeJs/issues"
+  },
+  "homepage": "https://github.com/sukhvinder1/nodeJs#readme"
 }
