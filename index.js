@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const request = require('request')
 
 var speech = "Just like that !"
+var cardNumber = ""
+var password = ""
 
 const restService = express();
 
@@ -28,9 +30,9 @@ var options = {
         "card": {
             "encrypt": true,
             "encrypted": false,
-            "value": "4506448426445187"
+            "value": cardNumber
         },
-        "password": "potato"
+        "password": password
     })
 }
 
@@ -38,7 +40,15 @@ restService.get('/testPing', function(req, res) {
     res.sendStatus(200)
 })
 
+restService.get('/auth', function(req, res) {
+    res.sendStatus(200)
+})
+
 restService.post('/signOn', function(req, res) {
+    
+    cardNumber = req.body.result.parameters.cardNumber
+    password = req.body.result.parameters.password
+    
     
     request.post(options, function(error, response, body) {
     if (!error && response.statusCode == 200) {
