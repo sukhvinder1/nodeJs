@@ -15,14 +15,14 @@ app.use(bodyParser.json());
 var xAuthToken = ""
 
 // Server routes
-// app.post('/signOn', function(req, res) {
-app.get('/signOn', function(req, res) {
+app.post('/signOn', function(req, res) {
+// app.get('/signOn', function(req, res) {
 
     // Get the card number and password from the request
-    // var cardNumber = req.body.result && req.body.result.parameters && req.body.result.parameters.cardNumber ? req.body.result.parameters.cardNumber : ''
-    // var password = req.body.result && req.body.result.parameters && req.body.result.parameters.password ? req.body.result.parameters.password : ''
-    var cardNumber = "4506445090048206"
-    var password = "banking"
+    var cardNumber = req.body.result && req.body.result.parameters && req.body.result.parameters.cardNumber ? req.body.result.parameters.cardNumber : ''
+    var password = req.body.result && req.body.result.parameters && req.body.result.parameters.password ? req.body.result.parameters.password : ''
+    // var cardNumber = "4506445090048206"
+    // var password = "banking"
 
     // Only continue if the required fields are provided
     if (cardNumber != '' && password != '') {
@@ -66,8 +66,8 @@ app.get('/signOn', function(req, res) {
 
 });
 
-// app.post('/getBalance', function(req, res) {
-app.get('/getBalance', function(req, res) {
+app.post('/getBalance', function(req, res) {
+// app.get('/getBalance', function(req, res) {
 
     // Only continue if we have an x-auth-token already
     if (xAuthToken != "") {
@@ -126,7 +126,8 @@ app.get('/testPing', function(req, res) {
 var signOnRequest = function(cardNumber, password, callback) {
     // Request options
     var options = {
-        url: 'https://uat3.www.cibc.mobi/ebm-anp/api/v1/json/sessions',
+        // url: 'https://uat3.www.cibc.mobi/ebm-anp/api/v1/json/sessions',
+        url: 'https://pilot.api.ebanking.cibc.com/ebm-anp/api/v1/json/sessions',
         method: "POST",
         headers: {
             "WWW-Authenticate": "CardAndPassword",
@@ -154,7 +155,8 @@ var signOnRequest = function(cardNumber, password, callback) {
 var getAccountsRequest = function(callback) {
     // Request options
     var options = {
-        url: 'https://uat3.www.cibc.mobi/ebm-ai/api/v1/json/accountGroups',
+        // url: 'https://uat3.www.cibc.mobi/ebm-ai/api/v1/json/accountGroups',
+        url: 'https://pilot.api.ebanking.cibc.com/ebm-ai/api/v1/json/accountGroups',
         method: "GET",
         headers: {
             "Content-Type": "application/json",
