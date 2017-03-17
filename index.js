@@ -41,9 +41,14 @@ app.post('/signOn', function(req, res) {
                 console.log(response.headers["x-auth-token"])
 
                 res.status(200)
+                // res.json({
+                //     result: "Success",
+                //     message: "You have successfully signed on"
+                // })
                 res.json({
-                    result: "Success",
-                    message: "You have successfully signed on"
+                    speech: "You have successfully signed on",
+                    displayText: "You have successfully signed on",
+                    source: 'CIBC'
                 })
 
             } else {
@@ -52,8 +57,9 @@ app.post('/signOn', function(req, res) {
 
                 res.status(400)
                 return res.json({
-                    result: "Failure",
-                    message: "Sign in failed"
+                    speech: "Sign on failed.  Please try again.",
+                    displayText: "Sign on failed.  Please try again.",
+                    source: 'CIBC'
                 })
             }
         }
@@ -64,8 +70,9 @@ app.post('/signOn', function(req, res) {
     } else {
         res.status(400)
         res.json({
-            result: "Failure",
-            message: "Card number or password not provided"
+            speech: "Card number not provided.  Please try again.",
+            displayText: "Card number not provided.  Please try again.",
+            source: 'CIBC'
         })
     }
 
