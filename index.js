@@ -98,7 +98,7 @@ app.post('/getBalance', function(req, res) {
 
         var callback = function(error, response, body) {
             if (!error && response.statusCode == 200) {
-                console.log("\n\n\n\n\n")
+                console.log("\n\n\n")
                 console.log("success on accounts")
                 jsonBody = JSON.parse(body)
                 // Set balance safely (will not give an exception when null)
@@ -108,23 +108,30 @@ app.post('/getBalance', function(req, res) {
                     var balanceCurrency = balance.currency
                     var balanceAmount = balance.amount
                     res.json({
-                        result: "Success",
-                        message: "Your balance has been retrieved",
-                        amount: balanceAmount,
-                        currency: balanceCurrency
+                        speech: "Your balance is, $" + balanceAmount,
+                        displayText: "Your balance is, $" + balanceAmount,
+                        source: 'CIBC'
                     })
                 } else {
                     // Balance, or the path to it doesn't exist.  Something is wrong with accounts.
                     res.status(500)
                     res.json({
-                        result: "Failure",
-                        message: "Unable to get balance"
+                        speech: "Unable to get balance",
+                        displayText: "Unable to get balance",
+                        source: 'CIBC'
                     })
                 }
                 // console.log(body)
             } else {
                 console.log("failed on accounts")
                 console.log(error)
+
+                res.status(500)
+                res.json({
+                    speech: "Unable to get balance",
+                    displayText: "Unable to get balance",
+                    source: 'CIBC'
+                })
             }
         }
 
@@ -133,8 +140,9 @@ app.post('/getBalance', function(req, res) {
     } else {
         res.status(403)
         res.json({
-            result: "Failure",
-            message: "You are not authenticated."
+            speech: 'You are not signed in, please say "sign in" to sign in first',
+            displayText: 'You are not signed in, please say "sign in" to sign in first',
+            source: 'CIBC'
         })
     }
 })
