@@ -19,6 +19,15 @@ app.post('/homeHook', function(req, res) {
     // result.metadata.intentName
     var intent = req.body.result && req.body.result.metadata && req.body.result.metadata.intentName ? req.body.result.metadata.intentName : ''
     
+    console.log("Incoming request to /homeHook")
+    console.log("Intent is: " + intent)
+    console.log("\n\n\nRequested Url:")
+    console.log(req.url)
+    console.log("\n\n\nHeaders in the request:")
+    console.log(req.headers)
+    console.log("\n\n\nBody of the request:")
+    console.log(req.body)
+
     if (intent == 'signIn') {
         signOnHandler(req, res)
     } else if (intent == 'getBalance') {
@@ -191,14 +200,6 @@ app.get('/testPing', function(req, res) {
 var signOnHandler = function(req, res) {
 // app.get('/signOn', function(req, res) {
 
-    console.log("Incoming request to /signOn")
-    console.log("\n\n\nRequested Url:")
-    console.log(req.url)
-    console.log("\n\n\nHeaders in the request:")
-    console.log(req.headers)
-    console.log("\n\n\nBody of the request:")
-    console.log(req.body)
-
     // Get the card number and password from the request
     var cardNickname = req.body.result && req.body.result.parameters && req.body.result.parameters.cardNickname ? req.body.result.parameters.cardNickname : ''
     var password = req.body.result && req.body.result.parameters && req.body.result.parameters.password ? req.body.result.parameters.password : ''
@@ -273,15 +274,6 @@ var signOnHandler = function(req, res) {
 
 var getBalanceHandler = function(req, res) {
 // app.get('/getBalance', function(req, res) {
-
-    console.log("Incoming request to /getBalance")
-    console.log("\n\n\nRequested Url:")
-    console.log(req.url)
-    console.log("\n\n\nHeaders in the request:")
-    console.log(req.headers)
-    console.log("\n\n\nBody of the request:")
-    console.log(req.body)
-
 
     // Only continue if we have an x-auth-token already
     if (xAuthToken != "") {
