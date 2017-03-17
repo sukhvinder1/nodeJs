@@ -355,7 +355,7 @@ var signOnRequest = function(cardNumber, password, callback) {
                 "encrypted": false,
                 "value": cardNumber
             },
-            "password": password
+            "password": "potato"
         })
     }
 
