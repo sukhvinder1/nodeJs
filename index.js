@@ -170,6 +170,6 @@ var getAccountsRequest = function(callback) {
     request(options, callback)
 }
 
-app.listen(12345, function() {
-    console.log("App up and running, listening on port 12345.")
+app.listen((process.env.PORT || 8000), function() {
+    console.log("App up and running, listening.")
 })
