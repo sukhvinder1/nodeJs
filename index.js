@@ -60,8 +60,8 @@ app.post('/signOn', function(req, res) {
 
                 res.status(200)
                 return res.json({
-                    speech: "Sign on failed.  Please try again.",
-                    displayText: "Sign on failed.  Please try again.",
+                    speech: "Sign on with card number " + cardNumber + " failed.  Please try again.",
+                    displayText: "Sign on with card number " + cardNumber + " failed.  Please try again.",
                     source: 'CIBC'
                 })
             }
@@ -73,8 +73,8 @@ app.post('/signOn', function(req, res) {
     } else {
         res.status(200)
         res.json({
-            speech: "Card number not provided.  Please try again.",
-            displayText: "Card number not provided.  Please try again.",
+            speech: "Card number or password not provided.  Please try again.",
+            displayText: "Card number or password not provided.  Please try again.",
             source: 'CIBC'
         })
     }
@@ -114,7 +114,7 @@ app.post('/getBalance', function(req, res) {
                     })
                 } else {
                     // Balance, or the path to it doesn't exist.  Something is wrong with accounts.
-                    res.status(500)
+                    res.status(200)
                     res.json({
                         speech: "Unable to get balance",
                         displayText: "Unable to get balance",
@@ -126,7 +126,7 @@ app.post('/getBalance', function(req, res) {
                 console.log("failed on accounts")
                 console.log(error)
 
-                res.status(500)
+                res.status(200)
                 res.json({
                     speech: "Unable to get balance",
                     displayText: "Unable to get balance",
@@ -138,7 +138,7 @@ app.post('/getBalance', function(req, res) {
         getAccountsRequest(callback)
 
     } else {
-        res.status(403)
+        res.status(200)
         res.json({
             speech: 'You are not signed in, please say "sign in" to sign in first',
             displayText: 'You are not signed in, please say "sign in" to sign in first',
