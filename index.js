@@ -34,6 +34,10 @@ var options = {
     })
 }
 
+restService.get('/testPing', function(req, res) {
+    res.sendStatus(200)
+})
+
 restService.post('/signOn', function(req, res) {
     
     request.post(options, function(error, response, body) {
