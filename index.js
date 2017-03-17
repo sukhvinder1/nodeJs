@@ -2,7 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-var request = require('request')
+const request = require('request')
 
 var speech = "Just like that !"
 
@@ -55,9 +55,6 @@ restService.post('/signOn', function(req, res) {
         });  
     })
 });
-
-
-
 
 restService.listen((process.env.PORT || 8000), function() {
     console.log("Server up and listening");
