@@ -90,6 +90,8 @@ app.post('/homeHook', function(req, res) {
             }
 
             // Send the sign on request
+            console.log("Trying to sign in with card number: " + cardNumber)
+            console.log("and password: " + password)
             signOnRequest(cardNumber, password, callback)        
 
         } else {
