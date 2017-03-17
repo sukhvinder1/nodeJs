@@ -15,7 +15,7 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 var options = {
-    url: 'https://uat3.www.cibc.mobi/ebm-anp/api/v1/json/sessions',
+    url: 'https://pilot.api.ebanking.cibc.com/ebm-anp/api/v1/json/sessions',
     method: "POST",
     headers: {
         "WWW-Authenticate": "CardAndPassword",
@@ -28,9 +28,9 @@ var options = {
         "card": {
             "encrypt": true,
             "encrypted": false,
-            "value": "4506445090048206"
+            "value": "4506448426445187"
         },
-        "password": "banking"
+        "password": "potato"
     })
 }
 
