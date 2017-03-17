@@ -18,6 +18,11 @@ var xAuthToken = ""
 app.post('/signOn', function(req, res) {
 // app.get('/signOn', function(req, res) {
 
+    console.log("Incoming request to /signOn")
+    console.log(req.url)
+    console.log(req.headers)
+    console.log(req.body)
+
     // Get the card number and password from the request
     var cardNumber = req.body.result && req.body.result.parameters && req.body.result.parameters.cardNumber ? req.body.result.parameters.cardNumber : ''
     var password = req.body.result && req.body.result.parameters && req.body.result.parameters.password ? req.body.result.parameters.password : ''
@@ -68,6 +73,12 @@ app.post('/signOn', function(req, res) {
 
 app.post('/getBalance', function(req, res) {
 // app.get('/getBalance', function(req, res) {
+
+    console.log("Incoming request to /getBalance")
+    console.log(req.url)
+    console.log(req.headers)
+    console.log(req.body)
+
 
     // Only continue if we have an x-auth-token already
     if (xAuthToken != "") {
