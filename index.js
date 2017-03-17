@@ -58,7 +58,7 @@ app.post('/signOn', function(req, res) {
                 console.log("failed")
                 console.log(error)
 
-                res.status(400)
+                res.status(200)
                 return res.json({
                     speech: "Sign on failed.  Please try again.",
                     displayText: "Sign on failed.  Please try again.",
@@ -71,7 +71,7 @@ app.post('/signOn', function(req, res) {
         signOnRequest(cardNumber, password, callback)        
 
     } else {
-        res.status(400)
+        res.status(200)
         res.json({
             speech: "Card number not provided.  Please try again.",
             displayText: "Card number not provided.  Please try again.",
