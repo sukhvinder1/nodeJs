@@ -19,8 +19,11 @@ app.post('/signOn', function(req, res) {
 // app.get('/signOn', function(req, res) {
 
     console.log("Incoming request to /signOn")
+    console.log("\n\n\nRequested Url:")
     console.log(req.url)
+    console.log("\n\n\nHeaders in the request:")
     console.log(req.headers)
+    console.log("\n\n\nBody of the request:")
     console.log(req.body)
 
     // Get the card number and password from the request
@@ -82,8 +85,11 @@ app.post('/getBalance', function(req, res) {
 // app.get('/getBalance', function(req, res) {
 
     console.log("Incoming request to /getBalance")
+    console.log("\n\n\nRequested Url:")
     console.log(req.url)
+    console.log("\n\n\nHeaders in the request:")
     console.log(req.headers)
+    console.log("\n\n\nBody of the request:")
     console.log(req.body)
 
 
