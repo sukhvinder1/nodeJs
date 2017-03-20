@@ -39,7 +39,8 @@ app.post('/homeHook', function(req, res) {
         var cardNumbers = [
             "4506448426445187",
             "4506448426445112",
-            "4506448426445252"
+            "4506448426445252",
+            "4506445644608992"
         ]
 
         var cardNumber = ""
@@ -49,6 +50,8 @@ app.post('/homeHook', function(req, res) {
             cardNumber = cardNumbers[1]
         } else if (cardNickname.toUpperCase() === "Nick".toUpperCase()) {
             cardNumber = cardNumbers[2]
+        } else if (cardNickname.toUpperCase() === "Colin".toUpperCase() || cardNickname.toUpperCase() === "young money".toUpperCase()) {
+            cardNumber = cardNumbers[3]
         }
 
         // Set the callback for the call
@@ -153,9 +156,9 @@ app.post('/homeHook', function(req, res) {
         } else if (questionContext == "raise salary") {
             response = "According to my records, you work for CIBC.  Keep up the good work and your wonderful managers will take care of your pay."
         } else if (questionContext == "edeposit") {
-            response = "First, you must have the CIBC Mobile Banking app and be registered for CIBC Online and Mobile Banking, then sign on. "
+            response = "First, you must have the CIBC Mobile Banking app and be registered for CIBC Online and Mobile Banking, then sign on."
         } else if (questionContext == "stolen credit card") {
-            response = "If you believe that your card may have been used fraudulently, contact CIBC Credit Card Services at 1-800-663-4575 (Canada & U.S.) or 514-861-9898 (from elsewhere)."
+            response = "I'm sorry to hear that, we're here to help.  If you believe that your card may have been used fraudulently, contact CIBC Credit Card Services at 1-800-663-4575 in Canada or the U.S., or 514-861-9898 from elsewhere."
         } else if (questionContext == "fx rate") {
             response = "To obtain historical or current foreign exchange rates, please contact CIBC Telephone Banking at 1-800-465-2422. Assistance is available 24 hours a day, seven days a week."
         } 
