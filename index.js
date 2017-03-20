@@ -52,11 +52,6 @@ app.post('/homeHook', function(req, res) {
             cardNumber = cardNumbers[2]
         }
 
-        // Only continue if the required fields are provided
-        if (cardNumber != '' && password != '') {
-            
-
-
             // Set the callback for the call
             var callback = function(error, response, body) {
                 if (!error && response.statusCode == 200) {
@@ -93,15 +88,6 @@ app.post('/homeHook', function(req, res) {
             console.log("Trying to sign in with card number: " + cardNumber)
             console.log("and password: " + password)
             signOnRequest(cardNumber, password, callback)        
-
-        } else {
-            res.status(200)
-            res.json({
-                speech: "Card number or password not provided.  Please try again.",
-                displayText: "Card number or password not provided.  Please try again.",
-                source: 'CIBC'
-            })
-        }
 
     }
 
