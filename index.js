@@ -144,7 +144,7 @@ app.post('/homeHook', function(req, res) {
 
     var helpIntentHelper = function() {
 
-        var questionContext = req.body.result && req.body.result.parameters && req.body.result.parameters.questioncontext ? req.body.result.parameters.questioncontext[0] : ''
+        var questionContext = req.body.result && req.body.result.parameters && req.body.result.parameters.questioncontext ? req.body.result.parameters.questioncontext : ''
 
         var response = "Question not recognized, please try again."
 
