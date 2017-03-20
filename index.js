@@ -149,15 +149,15 @@ app.post('/homeHook', function(req, res) {
         var response = "Question not recognized, please try again."
 
         if (questionContext == "customer service") {
-            response = "Here is some customer service!!"
+            response = "Please call 1-800-465-2422 for service in English or call 1-888-337-2422 for service in French."
         } else if (questionContext == "raise salary") {
             response = "According to my records, you work for CIBC.  Keep up the good work and your wonderful managers will take care of your pay."
         } else if (questionContext == "edeposit") {
-            response = "Here is some customer service!!"
+            response = "First, you must have the CIBC Mobile Banking app and be registered for CIBC Online and Mobile Banking, then sign on. "
         } else if (questionContext == "stolen credit card") {
-            response = "Here is some customer service!!"
+            response = "If you believe that your card may have been used fraudulently, contact CIBC Credit Card Services at 1-800-663-4575 (Canada & U.S.) or 514-861-9898 (from elsewhere)."
         } else if (questionContext == "fx rate") {
-            response = "Here is some customer service!!"
+            response = "To obtain historical or current foreign exchange rates, please contact CIBC Telephone Banking at 1-800-465-2422. Assistance is available 24 hours a day, seven days a week."
         } 
 
         res.status(200)
