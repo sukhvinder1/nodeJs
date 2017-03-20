@@ -151,7 +151,7 @@ app.post('/homeHook', function(req, res) {
         if (questionContext == "customer service") {
             response = "Here is some customer service!!"
         } else if (questionContext == "raise salary") {
-            response = "Here is some customer service!!"
+            response = "According to my records, you work for CIBC.  Keep up the good work and your wonderful managers will take care of your pay."
         } else if (questionContext == "edeposit") {
             response = "Here is some customer service!!"
         } else if (questionContext == "stolen credit card") {
