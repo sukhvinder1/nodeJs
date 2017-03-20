@@ -29,7 +29,6 @@ app.post('/homeHook', function(req, res) {
     console.log(req.body)
 
     var signOnHandler = function() {
-    // app.get('/signOn', function(req, res) {
 
         // Get the card number and password from the request
         var cardNickname = req.body.result && req.body.result.parameters && req.body.result.parameters.cardNickname ? req.body.result.parameters.cardNickname : ''
@@ -55,8 +54,6 @@ app.post('/homeHook', function(req, res) {
         // Only continue if the required fields are provided
         if (cardNumber != '' && password != '') {
             
-
-
             // Set the callback for the call
             var callback = function(error, response, body) {
                 if (!error && response.statusCode == 200) {
@@ -66,10 +63,6 @@ app.post('/homeHook', function(req, res) {
                     console.log(response.headers["x-auth-token"])
 
                     res.status(200)
-                    // res.json({
-                    //     result: "Success",
-                    //     message: "You have successfully signed on"
-                    // })
                     res.json({
                         speech: "You have successfully signed on",
                         displayText: "You have successfully signed on",
@@ -106,7 +99,6 @@ app.post('/homeHook', function(req, res) {
     }
 
     var getBalanceHandler = function() {
-    // app.get('/getBalance', function(req, res) {
 
         // Only continue if we have an x-auth-token already
         if (xAuthToken != "") {
@@ -162,10 +154,31 @@ app.post('/homeHook', function(req, res) {
         }
     }
 
+    var helpIntentHelper = function() {
+
+        var questionContext = req.body.result && req.body.result.parameters && req.body.result.parameters.question-context ? req.body.result.parameters.question-context[0] : ''
+
+        var response = "Question not recognized, please try again."
+
+        if (questionContext == "customer service") {
+            response = "Here is some customer service!!"
+        }
+
+        res.status(200)
+        res.json({
+            speech: response,
+            displayText: response,
+            source: 'CIBC'
+        })
+    }
+
     if (intent == 'signIn') {
         signOnHandler()
     } else if (intent == 'getBalance') {
         getBalanceHandler()
+    } 
+    else if (intent == 'help') {
+        helpIntentHelper()
     } else {
         res.status(200)
         res.json({
@@ -222,10 +235,6 @@ app.post('/signOn', function(req, res) {
                 console.log(response.headers["x-auth-token"])
 
                 res.status(200)
-                // res.json({
-                //     result: "Success",
-                //     message: "You have successfully signed on"
-                // })
                 res.json({
                     speech: "You have successfully signed on",
                     displayText: "You have successfully signed on",
