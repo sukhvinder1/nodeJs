@@ -71,8 +71,8 @@ app.post('/homeHook', function(req, res) {
                     //     message: "You have successfully signed on"
                     // })
                     res.json({
-                        speech: "You have successfully signed on",
-                        displayText: "You have successfully signed on",
+                        speech: "You have successfully signed on, what would you like to do today ?",
+                        displayText: "You have successfully signed on, what would you like to do today ?",
                         source: 'CIBC'
                     })
 
