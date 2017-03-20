@@ -150,7 +150,15 @@ app.post('/homeHook', function(req, res) {
 
         if (questionContext == "customer service") {
             response = "Here is some customer service!!"
-        }
+        } else if (questionContext == "raise salary") {
+            response = "Here is some customer service!!"
+        } else if (questionContext == "edeposit") {
+            response = "Here is some customer service!!"
+        } else if (questionContext == "stolen credit card") {
+            response = "Here is some customer service!!"
+        } else if (questionContext == "fx rate") {
+            response = "Here is some customer service!!"
+        } 
 
         res.status(200)
         res.json({
