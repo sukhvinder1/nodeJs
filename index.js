@@ -51,50 +51,38 @@ app.post('/homeHook', function(req, res) {
             cardNumber = cardNumbers[2]
         }
 
-        // Only continue if the required fields are provided
-        if (cardNumber != '' && password != '') {
-            
-            // Set the callback for the call
-            var callback = function(error, response, body) {
-                if (!error && response.statusCode == 200) {
-                    console.log("success")
-                    // console.log(body)
-                    xAuthToken = response.headers["x-auth-token"]
-                    console.log(response.headers["x-auth-token"])
+        // Set the callback for the call
+        var callback = function(error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log("success")
+                // console.log(body)
+                xAuthToken = response.headers["x-auth-token"]
+                console.log(response.headers["x-auth-token"])
 
-                    res.status(200)
-                    res.json({
-                        speech: "You have successfully signed on",
-                        displayText: "You have successfully signed on",
-                        source: 'CIBC'
-                    })
+                res.status(200)
+                res.json({
+                    speech: "You have successfully signed on, what would you like to do today ?",
+                    displayText: "You have successfully signed on, what would you like to do today ?",
+                    source: 'CIBC'
+                })
 
-                } else {
-                    console.log("failed")
-                    console.log(error)
+            } else {
+                console.log("failed")
+                console.log(error)
 
-                    res.status(200)
-                    return res.json({
-                        speech: "Signing on as " + cardNickname + " failed.  Please try again.",
-                        displayText: "Signing on as " + cardNickname + " failed.  Please try again.",
-                        source: 'CIBC'
-                    })
-                }
+                res.status(200)
+                return res.json({
+                    speech: "Signing on as " + cardNickname + " failed.  Please try again.",
+                    displayText: "Signing on as " + cardNickname + " failed.  Please try again.",
+                    source: 'CIBC'
+                })
             }
-
-            // Send the sign on request
-            console.log("Trying to sign in with card number: " + cardNumber)
-            console.log("and password: " + password)
-            signOnRequest(cardNumber, password, callback)        
-
-        } else {
-            res.status(200)
-            res.json({
-                speech: "Card number or password not provided.  Please try again.",
-                displayText: "Card number or password not provided.  Please try again.",
-                source: 'CIBC'
-            })
         }
+
+        // Send the sign on request
+        console.log("Trying to sign in with card number: " + cardNumber)
+        console.log("and password: " + password)
+        signOnRequest(cardNumber, password, callback)        
 
     }
 
