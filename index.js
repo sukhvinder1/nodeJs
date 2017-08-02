@@ -5,6 +5,9 @@ var request = require('request');
 
 var app = express();
 
+const ActionsSdkApp = require('actions-on-google').ActionsSdkApp;
+const ApiAiApp = require('actions-on-google').ApiAiApp;
+
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -18,7 +21,7 @@ var xAuthToken = ""
 app.post('/homeHook', function(req, res) {
     // result.metadata.intentName
     var intent = req.body.result && req.body.result.metadata && req.body.result.metadata.intentName ? req.body.result.metadata.intentName : ''
-    
+
     console.log("Incoming request to /homeHook")
     console.log("Intent is: " + intent)
     console.log("\n\n\nRequested Url:")
@@ -85,7 +88,7 @@ app.post('/homeHook', function(req, res) {
         // Send the sign on request
         console.log("Trying to sign in with card number: " + cardNumber)
         console.log("and password: " + password)
-        signOnRequest(cardNumber, password, callback)        
+        signOnRequest(cardNumber, password, callback)
 
     }
 
@@ -161,7 +164,7 @@ app.post('/homeHook', function(req, res) {
             response = "I'm sorry to hear that, we're here to help.  If you believe that your card may have been used fraudulently, contact CIBC Credit Card Services at 1-800-663-4575 in Canada or the U.S., or 514-861-9898 from elsewhere."
         } else if (questionContext == "fx rate") {
             response = "To obtain historical or current foreign exchange rates, please contact CIBC Telephone Banking at 1-800-465-2422. Assistance is available 24 hours a day, seven days a week."
-        } 
+        }
 
         res.status(200)
         res.json({
@@ -175,7 +178,7 @@ app.post('/homeHook', function(req, res) {
         signOnHandler()
     } else if (intent == 'getBalance') {
         getBalanceHandler()
-    } 
+    }
     else if (intent == 'help') {
         helpIntentHelper()
     } else {
@@ -222,7 +225,7 @@ app.post('/signOn', function(req, res) {
 
     // Only continue if the required fields are provided
     if (cardNumber != '' && password != '') {
-        
+
 
 
         // Set the callback for the call
@@ -254,7 +257,7 @@ app.post('/signOn', function(req, res) {
         }
 
         // Send the sign on request
-        signOnRequest(cardNumber, password, callback)        
+        signOnRequest(cardNumber, password, callback)
 
     } else {
         res.status(200)
@@ -336,6 +339,38 @@ app.post('/getBalance', function(req, res) {
 app.get('/testPing', function(req, res) {
     res.sendStatus(200)
 })
+
+app.post('/location', (req, res) => {
+	const app = new ApiAiApp({request: req, response: res});
+	const intent = app.getIntent();
+
+	switch(intent){
+		case 'input.welcome':
+			// you are able to request for multiple permissions at once
+			const permissions = [
+				app.SupportedPermissions.NAME,
+				app.SupportedPermissions.DEVICE_PRECISE_LOCATION
+			];
+			app.askForPermissions('Your own reason', permissions);
+		break;
+		case 'DefaultWelcomeIntent.DefaultWelcomeIntent-fallback':
+			if (app.isPermissionGranted()) {
+				// permissions granted.
+				let displayName = app.getUserName().displayName;
+
+				//NOTE: app.getDeviceLocation().address always return undefined for me. not sure if it is a bug.
+				// 			app.getDeviceLocation().coordinates seems to return a correct values
+				//			so i have to use node-geocoder to get the address out of the coordinates
+				let coordinates = app.getDeviceLocation().address;
+
+				app.tell('Hi ' + app.getUserName().givenName + '! Your address is ' + address);
+			}else{
+				// permissions are not granted. ask them one by one manually
+				app.ask('Alright. Can you tell me you address please?');
+			}
+		break;
+	}
+});
 // End server routes
 
 // api.ai call handlers
