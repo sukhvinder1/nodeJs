@@ -43,6 +43,10 @@ router.post('/location', (req, res) => {
 	}
 });
 
+router.get('/testPing', function(req, res) {
+    res.sendStatus(200)
+})
+
 express.use('/example', router);
 
 express.listen('8081', function () {
