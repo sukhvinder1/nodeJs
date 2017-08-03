@@ -372,7 +372,7 @@ app.post('/location', (req, res) => {
 			}
 		break;
 	}
-
+  console.log("REQUEST :::: ");
   console.log(res);
 });
 // End server routes
