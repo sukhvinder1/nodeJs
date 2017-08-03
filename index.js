@@ -344,11 +344,13 @@ app.post('/location', (req, res) => {
 	const apiApp = new ApiAiApp({request: req, response: res});
 	const intent = apiApp.getIntent();
 
+  console.log("REQUEST :::: \n");
   console.log(req);
 
 	switch(intent){
 		case 'input.welcome':
 			// you are able to request for multiple permissions at once
+      console.log("inside input welcome \n");
 			const permissions = [
 				apiApp.SupportedPermissions.NAME,
 				apiApp.SupportedPermissions.DEVICE_PRECISE_LOCATION
@@ -356,14 +358,18 @@ app.post('/location', (req, res) => {
 			apiApp.askForPermissions('Your own reason', permissions);
 		break;
 		case 'DefaultWelcomeIntent.DefaultWelcomeIntent-fallback':
+    console.log("inside DefaultWelcomeIntent.DefaultWelcomeIntent-fallback \n");
 			if (apiApp.isPermissionGranted()) {
 				// permissions granted.
 				let displayName = apiApp.getUserName().displayName;
 
+        console.log("displayName : " +  displayName);
 				//NOTE: apiApp.getDeviceLocation().address always return undefined for me. not sure if it is a bug.
 				// 			apiApp.getDeviceLocation().coordinates seems to return a correct values
 				//			so i have to use node-geocoder to get the address out of the coordinates
 				let coordinates = apiApp.getDeviceLocation().address;
+
+        console.log("coordinates : " +  coordinates);
 
 				apiApp.tell('Hi ' + apiApp.getUserName().givenName + '! Your address is ' + address);
 			}else{
@@ -372,7 +378,7 @@ app.post('/location', (req, res) => {
 			}
 		break;
 	}
-  console.log("REQUEST :::: ");
+  console.log("RESPONSE :::: \n");
   console.log(res);
 });
 // End server routes
