@@ -344,6 +344,8 @@ app.post('/location', (req, res) => {
 	const app = new ApiAiApp({request: req, response: res});
 	const intent = app.getIntent();
 
+  console.log(req);
+
 	switch(intent){
 		case 'input.welcome':
 			// you are able to request for multiple permissions at once
@@ -370,6 +372,8 @@ app.post('/location', (req, res) => {
 			}
 		break;
 	}
+
+  console.log(res);
 });
 // End server routes
 
