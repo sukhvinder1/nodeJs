@@ -341,8 +341,8 @@ app.get('/testPing', function(req, res) {
 })
 
 app.post('/location', (req, res) => {
-	const app = new ApiAiApp({request: req, response: res});
-	const intent = app.getIntent();
+	const apiApp = new ApiAiApp({request: req, response: res});
+	const intent = apiApp.getIntent();
 
   console.log(req);
 
@@ -350,25 +350,25 @@ app.post('/location', (req, res) => {
 		case 'input.welcome':
 			// you are able to request for multiple permissions at once
 			const permissions = [
-				app.SupportedPermissions.NAME,
-				app.SupportedPermissions.DEVICE_PRECISE_LOCATION
+				apiApp.SupportedPermissions.NAME,
+				apiApp.SupportedPermissions.DEVICE_PRECISE_LOCATION
 			];
-			app.askForPermissions('Your own reason', permissions);
+			apiApp.askForPermissions('Your own reason', permissions);
 		break;
 		case 'DefaultWelcomeIntent.DefaultWelcomeIntent-fallback':
-			if (app.isPermissionGranted()) {
+			if (apiApp.isPermissionGranted()) {
 				// permissions granted.
-				let displayName = app.getUserName().displayName;
+				let displayName = apiApp.getUserName().displayName;
 
-				//NOTE: app.getDeviceLocation().address always return undefined for me. not sure if it is a bug.
-				// 			app.getDeviceLocation().coordinates seems to return a correct values
+				//NOTE: apiApp.getDeviceLocation().address always return undefined for me. not sure if it is a bug.
+				// 			apiApp.getDeviceLocation().coordinates seems to return a correct values
 				//			so i have to use node-geocoder to get the address out of the coordinates
-				let coordinates = app.getDeviceLocation().address;
+				let coordinates = apiApp.getDeviceLocation().address;
 
-				app.tell('Hi ' + app.getUserName().givenName + '! Your address is ' + address);
+				apiApp.tell('Hi ' + apiApp.getUserName().givenName + '! Your address is ' + address);
 			}else{
 				// permissions are not granted. ask them one by one manually
-				app.ask('Alright. Can you tell me you address please?');
+				apiApp.ask('Alright. Can you tell me you address please?');
 			}
 		break;
 	}
